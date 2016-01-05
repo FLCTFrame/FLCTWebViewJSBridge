@@ -10,7 +10,6 @@
 		660D5CAE1C3A3EB800F78BAF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 660D5CAD1C3A3EB800F78BAF /* main.m */; };
 		660D5CB11C3A3EB800F78BAF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 660D5CB01C3A3EB800F78BAF /* AppDelegate.m */; };
 		660D5CB41C3A3EB800F78BAF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 660D5CB31C3A3EB800F78BAF /* ViewController.m */; };
-		660D5CB71C3A3EB800F78BAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 660D5CB51C3A3EB800F78BAF /* Main.storyboard */; };
 		660D5CB91C3A3EB800F78BAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 660D5CB81C3A3EB800F78BAF /* Assets.xcassets */; };
 		660D5CBC1C3A3EB800F78BAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 660D5CBA1C3A3EB800F78BAF /* LaunchScreen.storyboard */; };
 		660D5CD01C3A3F1900F78BAF /* FLCTClientMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 660D5CC51C3A3F1900F78BAF /* FLCTClientMessage.m */; };
@@ -19,6 +18,7 @@
 		660D5CD31C3A3F1900F78BAF /* FLCTWebViewJSBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 660D5CCC1C3A3F1900F78BAF /* FLCTWebViewJSBridge.m */; };
 		660D5CD41C3A3F1900F78BAF /* FLCTWebViewMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 660D5CCE1C3A3F1900F78BAF /* FLCTWebViewMessage.m */; };
 		660D5CD51C3A3F1900F78BAF /* jsbridge.js in Resources */ = {isa = PBXBuildFile; fileRef = 660D5CCF1C3A3F1900F78BAF /* jsbridge.js */; };
+		660D5CD91C3A45E600F78BAF /* demo.html in Resources */ = {isa = PBXBuildFile; fileRef = 660D5CD81C3A45E600F78BAF /* demo.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +28,6 @@
 		660D5CB01C3A3EB800F78BAF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		660D5CB21C3A3EB800F78BAF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		660D5CB31C3A3EB800F78BAF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		660D5CB61C3A3EB800F78BAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		660D5CB81C3A3EB800F78BAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		660D5CBB1C3A3EB800F78BAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		660D5CBD1C3A3EB800F78BAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,6 +43,7 @@
 		660D5CCD1C3A3F1900F78BAF /* FLCTWebViewMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLCTWebViewMessage.h; sourceTree = "<group>"; };
 		660D5CCE1C3A3F1900F78BAF /* FLCTWebViewMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLCTWebViewMessage.m; sourceTree = "<group>"; };
 		660D5CCF1C3A3F1900F78BAF /* jsbridge.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jsbridge.js; sourceTree = "<group>"; };
+		660D5CD81C3A45E600F78BAF /* demo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = demo.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +81,10 @@
 				660D5CB01C3A3EB800F78BAF /* AppDelegate.m */,
 				660D5CB21C3A3EB800F78BAF /* ViewController.h */,
 				660D5CB31C3A3EB800F78BAF /* ViewController.m */,
-				660D5CB51C3A3EB800F78BAF /* Main.storyboard */,
 				660D5CB81C3A3EB800F78BAF /* Assets.xcassets */,
 				660D5CBA1C3A3EB800F78BAF /* LaunchScreen.storyboard */,
 				660D5CBD1C3A3EB800F78BAF /* Info.plist */,
+				660D5CD81C3A45E600F78BAF /* demo.html */,
 				660D5CAC1C3A3EB800F78BAF /* Supporting Files */,
 			);
 			path = FLCTWebViewJSBridge;
@@ -175,9 +175,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				660D5CD51C3A3F1900F78BAF /* jsbridge.js in Resources */,
+				660D5CD91C3A45E600F78BAF /* demo.html in Resources */,
 				660D5CBC1C3A3EB800F78BAF /* LaunchScreen.storyboard in Resources */,
 				660D5CB91C3A3EB800F78BAF /* Assets.xcassets in Resources */,
-				660D5CB71C3A3EB800F78BAF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,14 +202,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		660D5CB51C3A3EB800F78BAF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				660D5CB61C3A3EB800F78BAF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		660D5CBA1C3A3EB800F78BAF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -342,6 +334,7 @@
 				660D5CC21C3A3EB800F78BAF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

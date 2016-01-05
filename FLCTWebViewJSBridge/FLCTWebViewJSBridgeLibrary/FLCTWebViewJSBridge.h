@@ -13,7 +13,7 @@
 #pragma mark - FLCTWebViewJSBridge
 @interface FLCTWebViewJSBridge : NSObject<WKScriptMessageHandler,UIWebViewDelegate,WKNavigationDelegate>
 
-@property (nonatomic, assign) GroupValueType currentPermissionGroup;
+@property (nonatomic, copy) FLCTEventCallHandler canRunEvent;
 
 + (instancetype)bridgeForWebView:(id)webView delegate:(id)delegate;
 + (instancetype)bridgeForWebView:(id)webView delegate:(id)delegate resourceBundle:(NSBundle*)bundle;
@@ -21,12 +21,9 @@
 - (instancetype)initWithWKWebview:(WKWebView *)webview delegate:(NSObject<WKNavigationDelegate> *)delegate resourceBundle:(NSBundle*)bundle;
 
 - (void)addEventListener:(NSString *)eventName handler:(FLCTJSHandler)handler;
-- (void)addEventListener:(NSString *)eventName handler:(FLCTJSHandler)handler permissionGroupValue:(GroupValueType)groupValue;
 
 - (void)removeEventListener:(NSString *)eventName;
 - (void)removeEventListener:(NSString *)eventName handler:(FLCTJSHandler)handler;
-
-//- (NSSet<FLCTWebViewJSHanlder *> *)eventsForGroup:(GroupValueType)groupValue;
 
 - (void)invoke:(NSString *)eventName;
 - (void)invoke:(NSString *)eventName data:(id)data;

@@ -55,7 +55,7 @@
 
 #pragma init
 - (instancetype)initWithUIWebview:(UIWebView *)webview delegate:(NSObject<UIWebViewDelegate> *)delegate resourceBundle:(NSBundle*)bundle{
-    self = [super init];
+    self = [self init];
     if (self) {
         _uiWebview = webview;
         webview.delegate = self;
@@ -65,7 +65,7 @@
     return self;
 }
 - (instancetype)initWithWKWebview:(WKWebView *)webview delegate:(NSObject<WKNavigationDelegate> *)delegate resourceBundle:(NSBundle*)bundle{
-    self = [super init];
+    self = [self init];
     if (self) {
         _wkWebview = webview;
         webview.navigationDelegate = self;
@@ -133,10 +133,10 @@
         if (events && [events isKindOfClass:[NSSet class]]) {
             [events enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
                 FLCTMessageHandler *jsHandler = obj;
-                if ((jsHandler.permissionGroup&_currentPermissionGroup) != 0 && jsHandler.handler) {
+                if (self.canRunEvent && self.canRunEvent(message.eventName) && jsHandler.handler) {
                     FLCTJSResponseCallback callBack = ^(id data){
-                        FLCTClientMessage *message = [FLCTClientMessage initWithEventName:kJSCallBackEventName callBackId:message.callBackId data:data];
-                        [self dispatchMessage:message];
+                        FLCTClientMessage *callBackMessage = [FLCTClientMessage initWithEventName:kJSCallBackEventName callBackId:message.callBackId data:data];
+                        [self performSelector:@selector(dispatchMessage:) withObject:callBackMessage afterDelay:0.0];
                     };
                     jsHandler.handler(message.data,callBack);
                 }
@@ -178,29 +178,21 @@
 }
 
 - (void)evaluateJavaScript:(NSString *)jsString{
+    jsString = [jsString stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
+    jsString = [jsString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    jsString = [jsString stringByReplacingOccurrencesOfString:@"\'" withString:@"\\\'"];
+    jsString = [jsString stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+    jsString = [jsString stringByReplacingOccurrencesOfString:@"\r" withString:@"\\r"];
+    jsString = [jsString stringByReplacingOccurrencesOfString:@"\f" withString:@"\\f"];
+    jsString = [jsString stringByReplacingOccurrencesOfString:@"\u2028" withString:@"\\u2028"];
+    jsString = [jsString stringByReplacingOccurrencesOfString:@"\u2029" withString:@"\\u2029"];
+    jsString = [NSString stringWithFormat:@"FLCTJSBridge._getMessage(\"%@\")",jsString];
     if (_uiWebview != nil) {
-        [_jsContext evaluateScript:jsString];
+        [_jsContext evaluateScript: jsString];
     }else if (_wkWebview != nil){
-        [_wkWebview evaluateJavaScript:jsString completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-            
-        }];
+        [_wkWebview evaluateJavaScript:jsString completionHandler:nil];
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #pragma mark -
 
@@ -240,7 +232,9 @@
         NSString *filePath = [bundle pathForResource:@"jsbridge" ofType:@"js"];
         NSString *js = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
         [webView stringByEvaluatingJavaScriptFromString:js];
+        __weak FLCTWebViewJSBridge *weakSelf = self;
         _jsContext[[NSString stringWithFormat:@"__FLCTWebViewsendMessageToClient"]] = ^(id data){
+            [weakSelf evalueMessageDictionary:data];
         };
     }
     

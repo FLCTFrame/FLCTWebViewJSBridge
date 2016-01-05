@@ -15,13 +15,7 @@
 
 #define kJSCallBackEventName @"eventCallBack"
 
+typedef BOOL (^FLCTEventCallHandler)(NSString *eventName);
 typedef void (^FLCTJSResponseCallback)(id responseData);
 typedef void (^FLCTJSHandler)(id data, FLCTJSResponseCallback responseCallback);
 typedef NSUInteger GroupValueType;
-
-static inline id deserializeMessageJSON(NSString *messageJSON) {
-    return [NSJSONSerialization JSONObjectWithData:[messageJSON dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-}
-static inline NSString* serializeMessageObject(NSObject *object) {
-    return [[NSString alloc]initWithData:[NSJSONSerialization dataWithJSONObject:object options:0 error:nil] encoding:NSUTF8StringEncoding];
-}

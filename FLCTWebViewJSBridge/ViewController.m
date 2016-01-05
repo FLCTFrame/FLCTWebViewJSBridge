@@ -7,8 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "FLCTWebViewJSBridge.h"
 
 @interface ViewController ()
+
+@property (nonatomic,strong) UIWebView *webview;
+@property (nonatomic,strong) FLCTWebViewJSBridge *JSBridge;
 
 @end
 
@@ -16,12 +20,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [self buildUI];
+}
+- (void)buildUI{
+    self.view.backgroundColor = [UIColor whiteColor];
+    _webview = [[UIWebView alloc]initWithFrame:self.view.bounds];
+    _webview.backgroundColor = [UIColor whiteColor];
+    
+    _JSBridge = [FLCTWebViewJSBridge bridgeForWebView:_webview delegate:self];
+    _JSBridge.canRunEvent = ^BOOL(NSString *eventName) {
+        return YES;
+    };
+    [self.view addSubview:_webview];
+    
+    [self setJSBridgeEvent];
+    
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *filePath = [bundle pathForResource:@"demo" ofType:@"html"];
+    NSString *html = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    [_webview loadHTMLString:html baseURL:nil];
+    
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setJSBridgeEvent{
+    [_JSBridge addEventListener:@"log" handler:^(id data, FLCTJSResponseCallback responseCallback) {
+        NSLog(@"message from webview log:%@",data);
+        if (responseCallback) {
+            responseCallback(@"I just log a message in client console.");
+        }
+    }];
 }
 
 @end

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+</head>
+<body>
+	<h1>message test</h1>
+	<a href="javascript:;" id="sayhello">say hello</a>
+	<fieldset class="message" id="message-send-display">
+		<legend>message send</legend>
+		<div></div>
+	</fieldset>
+	<fieldset class="message" id="message-get-display">
+		<legend>message response</legend>
+		<div></div>
+	</fieldset>
+</body>
+<script type="text/javascript">
+
+	document.addEventListener('FLCTJSBridgeReady',function(){
+		var $ = function (id) {
+			return document.getElementById(id);
+		},messageSendDisplay = $('message-send-display'),
+		messageGetDisplay = $('message-get-display');
+
+		var messageHistory = function(message , elem){
+			var p = document.createElement('p');
+			p.innerHTML = message
+			elem.appendChild(p);
+		},sendMessage = function(message){
+			messageHistory(message,messageSendDisplay);
+		},getMessage = function(message){
+			messageHistory(message,messageGetDisplay);
+		}
+
+
+		$('sayhello').addEventListener('click',function(){
+			sendMessage('hello client');
+			if (FLCTJSBridge) {
+				FLCTJSBridge.invoke('log','hello client',function(data){
+					getMessage(data);
+				});
+			}
+		});
+
+		FLCTJSBridge.on('message',function(data,callBack){
+			getMessage('data');
+			if (callBack) {
+				callBack(true);
+			};
+		});
+	});
+</script>
+</html>
