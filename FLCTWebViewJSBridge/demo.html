@@ -46,9 +46,9 @@
 		});
 
 		FLCTJSBridge.on('message',function(data,callBack){
-			getMessage('data');
+			getMessage(data);
 			if (callBack) {
-				callBack(true);
+				callBack('oh I get you!');
 			};
 		});
 	});

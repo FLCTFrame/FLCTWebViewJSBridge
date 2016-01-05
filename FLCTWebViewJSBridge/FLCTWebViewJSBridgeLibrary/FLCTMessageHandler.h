@@ -15,9 +15,7 @@ typedef NSUInteger GroupValueType;
 
 @property (nonatomic, strong, readonly) NSString *eventName;
 @property (nonatomic, strong, readonly) FLCTJSHandler handler;
-@property (nonatomic, assign, readonly) GroupValueType permissionGroup;
 
 - (instancetype)initWithEventName:(NSString *)name handler:(FLCTJSHandler)handler;
-- (instancetype)initWithEventName:(NSString *)name handler:(FLCTJSHandler)handler permissionGroupValue:(GroupValueType)groupValue;
 
 @end

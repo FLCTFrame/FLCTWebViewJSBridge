@@ -31,6 +31,10 @@
     _JSBridge.canRunEvent = ^BOOL(NSString *eventName) {
         return YES;
     };
+    
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(sendMessage)];
+    
     [self.view addSubview:_webview];
     
     [self setJSBridgeEvent];
@@ -41,6 +45,12 @@
     [_webview loadHTMLString:html baseURL:nil];
     
     
+}
+
+- (void)sendMessage{
+    [_JSBridge invoke:@"message" data:@"hello" responseCallback:^(id responseData) {
+        NSLog(@"invoke:@\"post\" callback:%@",responseData);
+    }];
 }
 
 - (void)setJSBridgeEvent{

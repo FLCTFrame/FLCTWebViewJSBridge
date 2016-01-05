@@ -76,16 +76,13 @@
 }
 #pragma mark - Event Add
 - (void)addEventListener:(NSString *)eventName handler:(FLCTJSHandler)handler{
-    [self addEventListener:eventName handler:handler permissionGroupValue:0];
-}
-- (void)addEventListener:(NSString *)eventName handler:(FLCTJSHandler)handler permissionGroupValue:(GroupValueType)groupValue{
     NSAssert(eventName != nil, @"eventName should not be nil");
     NSMutableSet *events = [_eventList valueForKey:eventName];
     if (events == nil) {
         events = [NSMutableSet set];
         [_eventList setObject:events forKey:eventName];
     }
-    [events addObject:[[FLCTMessageHandler alloc] initWithEventName:eventName handler:handler permissionGroupValue:groupValue]];
+    [events addObject:[[FLCTMessageHandler alloc] initWithEventName:eventName handler:handler]];
 }
 
 #pragma mark - Event Remove
