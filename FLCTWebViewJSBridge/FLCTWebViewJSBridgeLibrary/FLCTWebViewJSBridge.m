@@ -46,7 +46,7 @@
 + (instancetype)bridgeForWebView:(id)webView delegate:(id)delegate resourceBundle:(NSBundle*)bundle{
     if ([webView isKindOfClass:[UIWebView class]]) {
         return [[FLCTWebViewJSBridge alloc]initWithUIWebview:webView delegate:delegate resourceBundle:bundle];
-    }else if([webView isKindOfClass:[WKWebView class]]){
+    }else if(NSClassFromString(@"WKWebView") != nil && [webView isKindOfClass:[NSClassFromString(@"WKWebView") class]]){
         return [[FLCTWebViewJSBridge alloc]initWithWKWebview:webView delegate:delegate resourceBundle:bundle];
     }else{
         return [super init];
