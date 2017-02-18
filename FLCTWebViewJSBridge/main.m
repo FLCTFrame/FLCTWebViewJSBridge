@@ -2,8 +2,8 @@
 //  main.m
 //  FLCTWebViewJSBridge
 //
-//  Created by Mapleiny on 16/1/4.
-//  Copyright © 2016年 Mapleiny. All rights reserved.
+//  Created by Yin Heng on 16/1/4.
+//  Copyright © 2016年 Yin Heng. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
